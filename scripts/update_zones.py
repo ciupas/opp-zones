@@ -121,7 +121,8 @@ def scrape_road(road_type: str, road: str) -> list[dict]:
 
     for heading in soup.find_all(['h2', 'h3']):
         raw_name = heading.get_text(strip=True)
-        if len(raw_name) < 4 or SKIP_HEADINGS.search(raw_name):
+        # Only real zone headings start with "Odcinek" (includes "Odcinek Tunel …")
+        if not raw_name.lower().startswith('odcinek'):
             continue
 
         # Deduplicate: ignore direction suffix in parentheses
@@ -169,14 +170,13 @@ def scrape_road(road_type: str, road: str) -> list[dict]:
         if m:
             limit_trucks = int(m.group(1))
 
-        # Length — first valid occurrence in a "Długość" line
+        # Length — find first number+m following any "Długość" label (multi-line safe)
         length_km = 0.0
-        for line in lines:
-            if re.search(r'D[łl]ugo[śs][ćc]', line, re.I):
-                lm = parse_length_m(line)
-                if lm > 0:
-                    length_km = round(lm / 1000, 3)
-                    break
+        m = re.search(r'D[łl]ugo[śs][ćc].*?(\d[\d ,]*\d|\d)\s*m\b', text, re.I | re.DOTALL)
+        if m:
+            lm = parse_length_m(m.group(1) + ' m')
+            if lm > 0:
+                length_km = round(lm / 1000, 3)
 
         # Coordinates — prefer labelled "Start:" / "Koniec:" lines
         start_lat = start_lon = end_lat = end_lon = 0.0

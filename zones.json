@@ -1,8 +1,869 @@
 {
   "version": "2.1",
   "updated": "2026-05-18",
-  "source": "CANARD/GITD + odcinkowy.pl (auto-scrape)",
-  "total_zones": 0,
-  "zones": [],
+  "source": "CANARD/GITD via naodcinku.pl (auto-scrape)",
+  "total_zones": 43,
+  "zones": [
+    {
+      "id": "OPP_A1_odcinek_a1_siemionki_lubien_kujawski",
+      "name": "Odcinek A1 – Siemionki ↔ Lubień Kujawski",
+      "road": "A1",
+      "voivodeship": "kujawsko-pomorskie",
+      "location": "Siemionki, gmina Lubień Kujawski, powiat włocławski",
+      "limit": 140,
+      "limit_trucks": 80,
+      "start": {
+        "lat": 52.440861,
+        "lon": 19.236581
+      },
+      "end": {
+        "lat": 52.339944,
+        "lon": 19.356483
+      },
+      "length_km": 14.025,
+      "direction": "both",
+      "_source_url": "https://naodcinku.pl/autostrada/a1/"
+    },
+    {
+      "id": "OPP_A1_odcinek_a1_kuczek_aleksandrow_kujawski",
+      "name": "Odcinek A1 – Kuczek ↔ Aleksandrów Kujawski",
+      "road": "A1",
+      "voivodeship": "kujawsko-pomorskie",
+      "location": "Kuczek, gmina Aleksandrów Kujawski, powiat aleksandrowski",
+      "limit": 140,
+      "limit_trucks": 80,
+      "start": {
+        "lat": 52.861903,
+        "lon": 18.7668
+      },
+      "end": {
+        "lat": 52.768964,
+        "lon": 18.8492
+      },
+      "length_km": 11.98,
+      "direction": "both",
+      "_source_url": "https://naodcinku.pl/autostrada/a1/"
+    },
+    {
+      "id": "OPP_A2_odcinek_a2_zdzary_stare_miasto",
+      "name": "Odcinek A2 – Żdżary ↔ Stare Miasto",
+      "road": "A2",
+      "voivodeship": "wielkopolskie",
+      "location": "Żdżary, gmina Stare Miasto, powiat koniński",
+      "limit": 140,
+      "limit_trucks": 80,
+      "start": {
+        "lat": 52.149683,
+        "lon": 18.289205
+      },
+      "end": {
+        "lat": 52.151241,
+        "lon": 18.448547
+      },
+      "length_km": 11.186,
+      "direction": "both",
+      "_source_url": "https://naodcinku.pl/autostrada/a2/"
+    },
+    {
+      "id": "OPP_A2_odcinek_a2_lubon_poznan",
+      "name": "Odcinek A2 – Luboń ↔ Poznań",
+      "road": "A2",
+      "voivodeship": "wielkopolskie",
+      "location": "Luboń, powiat poznański",
+      "limit": 120,
+      "limit_trucks": 80,
+      "start": {
+        "lat": 52.352194,
+        "lon": 16.861583
+      },
+      "end": {
+        "lat": 52.348389,
+        "lon": 16.969889
+      },
+      "length_km": 7.482,
+      "direction": "both",
+      "_source_url": "https://naodcinku.pl/autostrada/a2/"
+    },
+    {
+      "id": "OPP_A2_odcinek_a2_minsk_mazowiecki_janow",
+      "name": "Odcinek A2 – Mińsk Mazowiecki ↔ Janów",
+      "road": "A2",
+      "voivodeship": "mazowieckie",
+      "location": "Choszczówka Dębska, powiat miński",
+      "limit": 140,
+      "limit_trucks": 80,
+      "start": {
+        "lat": 52.205444,
+        "lon": 21.511111
+      },
+      "end": {
+        "lat": 52.201639,
+        "lon": 21.758028
+      },
+      "length_km": 17.384,
+      "direction": "both",
+      "_source_url": "https://naodcinku.pl/autostrada/a2/"
+    },
+    {
+      "id": "OPP_A2_odcinek_a2_koo_dabie",
+      "name": "Odcinek A2 – Koło ↔ Dąbie",
+      "road": "A2",
+      "voivodeship": "wielkopolskie",
+      "location": "Cichmiana, powiat kolski",
+      "limit": 140,
+      "limit_trucks": 80,
+      "start": {
+        "lat": 52.073992,
+        "lon": 18.808131
+      },
+      "end": {
+        "lat": 52.1395,
+        "lon": 18.614583
+      },
+      "length_km": 15.173,
+      "direction": "both",
+      "_source_url": "https://naodcinku.pl/autostrada/a2/"
+    },
+    {
+      "id": "OPP_A4_odcinek_a4_katy_wrocawskie_legnica",
+      "name": "Odcinek A4 – Kąty Wrocławskie ↔ Legnica",
+      "road": "A4",
+      "voivodeship": "dolnośląskie",
+      "location": "Kąty Wrocławskie, powiat wrocławski",
+      "limit": 110,
+      "limit_trucks": 80,
+      "start": {
+        "lat": 51.023111,
+        "lon": 16.776944
+      },
+      "end": {
+        "lat": 51.036806,
+        "lon": 16.880111
+      },
+      "length_km": 7.661,
+      "direction": "both",
+      "_source_url": "https://naodcinku.pl/autostrada/a4/"
+    },
+    {
+      "id": "OPP_A4_odcinek_a4_kostomoty_katy_wrocawskie",
+      "name": "Odcinek A4 – Kostomłoty ↔ Kąty Wrocławskie",
+      "road": "A4",
+      "voivodeship": "dolnośląskie",
+      "location": "Kostomłoty, powiat średzki",
+      "limit": 110,
+      "limit_trucks": 80,
+      "start": {
+        "lat": 51.035444,
+        "lon": 16.621556
+      },
+      "end": {
+        "lat": 51.019625,
+        "lon": 16.732558
+      },
+      "length_km": 8.095,
+      "direction": "both",
+      "_source_url": "https://naodcinku.pl/autostrada/a4/"
+    },
+    {
+      "id": "OPP_A4_odcinek_a4_prady_katowicewrocaw",
+      "name": "Odcinek A4 – Prądy ↔ Katowice/Wrocław",
+      "road": "A4",
+      "voivodeship": "opolskie",
+      "location": "Prądy, gmina Dąbrowa, powiat opolski",
+      "limit": 140,
+      "limit_trucks": 80,
+      "start": {
+        "lat": 50.656972,
+        "lon": 17.712861
+      },
+      "end": {
+        "lat": 50.573361,
+        "lon": 17.852639
+      },
+      "length_km": 13.606,
+      "direction": "both",
+      "_source_url": "https://naodcinku.pl/autostrada/a4/"
+    },
+    {
+      "id": "OPP_A4_odcinek_a4_gogolin",
+      "name": "Odcinek A4 – Gogolin",
+      "road": "A4",
+      "voivodeship": "opolskie",
+      "location": "Gogolin, powiat krapkowicki",
+      "limit": 140,
+      "limit_trucks": 80,
+      "start": {
+        "lat": 50.483972,
+        "lon": 18.006222
+      },
+      "end": {
+        "lat": 50.479,
+        "lon": 18.095111
+      },
+      "length_km": 6.488,
+      "direction": "both",
+      "_source_url": "https://naodcinku.pl/autostrada/a4/"
+    },
+    {
+      "id": "OPP_A4_odcinek_a4_krzyzowa",
+      "name": "Odcinek A4 – Krzyżowa",
+      "road": "A4",
+      "voivodeship": "dolnośląskie",
+      "location": "Krzyżowa, gmina Gromadka, powiat bolesławiecki",
+      "limit": 110,
+      "limit_trucks": 80,
+      "start": {
+        "lat": 51.321389,
+        "lon": 15.658889
+      },
+      "end": {
+        "lat": 51.278611,
+        "lon": 15.786111
+      },
+      "length_km": 10.273,
+      "direction": "both",
+      "_source_url": "https://naodcinku.pl/autostrada/a4/"
+    },
+    {
+      "id": "OPP_A4_odcinek_a4_tarnow",
+      "name": "Odcinek A4 – Tarnów",
+      "road": "A4",
+      "voivodeship": "małopolskie",
+      "location": "Tarnów, gmina Tarnów, powiat tarnowski",
+      "limit": 140,
+      "limit_trucks": 80,
+      "start": {
+        "lat": 50.054114,
+        "lon": 21.023711
+      },
+      "end": {
+        "lat": 50.095531,
+        "lon": 21.213147
+      },
+      "length_km": 14.762,
+      "direction": "both",
+      "_source_url": "https://naodcinku.pl/autostrada/a4/"
+    },
+    {
+      "id": "OPP_A8_odcinek_a8_wrocaw",
+      "name": "Odcinek A8 – Wrocław",
+      "road": "A8",
+      "voivodeship": "dolnośląskie",
+      "location": "Wrocław, powiat Wrocław",
+      "limit": 120,
+      "limit_trucks": 80,
+      "start": {
+        "lat": 51.167922,
+        "lon": 17.002533
+      },
+      "end": {
+        "lat": 51.117722,
+        "lon": 16.932247
+      },
+      "length_km": 8.336,
+      "direction": "both",
+      "_source_url": "https://naodcinku.pl/autostrada/a8/"
+    },
+    {
+      "id": "OPP_S2_odcinek_tunel_s2_warszawa",
+      "name": "Odcinek Tunel S2 – Warszawa",
+      "road": "S2",
+      "voivodeship": "",
+      "location": "Warszawa",
+      "limit": 80,
+      "limit_trucks": 80,
+      "start": {
+        "lat": 52.139989,
+        "lon": 21.031622
+      },
+      "end": {
+        "lat": 52.150589,
+        "lon": 21.063258
+      },
+      "length_km": 2.52,
+      "direction": "both",
+      "_source_url": "https://naodcinku.pl/droga-ekspresowa/s2/"
+    },
+    {
+      "id": "OPP_S2_odcinek_s2_warszawa_siedlce",
+      "name": "Odcinek S2 – Warszawa → Siedlce",
+      "road": "S2",
+      "voivodeship": "",
+      "location": "Warszawa / Wiązowna",
+      "limit": 100,
+      "limit_trucks": 80,
+      "start": {
+        "lat": 52.155,
+        "lon": 21.118639
+      },
+      "end": {
+        "lat": 52.193999,
+        "lon": 21.248056
+      },
+      "length_km": 10.336,
+      "direction": "both",
+      "_source_url": "https://naodcinku.pl/droga-ekspresowa/s2/"
+    },
+    {
+      "id": "OPP_S2_odcinek_s2_wiazowna_warszawa",
+      "name": "Odcinek S2 – Wiązowna → Warszawa",
+      "road": "S2",
+      "voivodeship": "",
+      "location": "Wiązowna / Warszawa",
+      "limit": 100,
+      "limit_trucks": 80,
+      "start": {
+        "lat": 52.155222,
+        "lon": 21.118472
+      },
+      "end": {
+        "lat": 52.193999,
+        "lon": 21.248028
+      },
+      "length_km": 10.338,
+      "direction": "both",
+      "_source_url": "https://naodcinku.pl/droga-ekspresowa/s2/"
+    },
+    {
+      "id": "OPP_S3_odcinek_tunel_s3_nowe_bogaczowice",
+      "name": "Odcinek Tunel S3 – Nowe Bogaczowice",
+      "road": "S3",
+      "voivodeship": "",
+      "location": "Nowe Bogaczowice, Stare Bogaczowice",
+      "limit": 80,
+      "limit_trucks": 80,
+      "start": {
+        "lat": 50.848847,
+        "lon": 16.151478
+      },
+      "end": {
+        "lat": 50.870661,
+        "lon": 16.158961
+      },
+      "length_km": 0.592,
+      "direction": "both",
+      "_source_url": "https://naodcinku.pl/droga-ekspresowa/s3/"
+    },
+    {
+      "id": "OPP_S3_odcinek_tunel_s3_sady_gorne",
+      "name": "Odcinek Tunel S3 – Sady Górne",
+      "road": "S3",
+      "voivodeship": "",
+      "location": "Sady Górne, Bolków",
+      "limit": 80,
+      "limit_trucks": 80,
+      "start": {
+        "lat": 50.870483,
+        "lon": 16.158336
+      },
+      "end": {
+        "lat": 50.84975,
+        "lon": 16.15183
+      },
+      "length_km": 0.447,
+      "direction": "both",
+      "_source_url": "https://naodcinku.pl/droga-ekspresowa/s3/"
+    },
+    {
+      "id": "OPP_S3_odcinek_s3_wieprzyce_gorzow_wielkopolski",
+      "name": "Odcinek S3 – Wieprzyce / Gorzów Wielkopolski",
+      "road": "S3",
+      "voivodeship": "lubuskie",
+      "location": "Wieprzyce, gmina Bogdaniec, powiat gorzowski",
+      "limit": 120,
+      "limit_trucks": 80,
+      "start": {
+        "lat": 52.708058,
+        "lon": 15.163078
+      },
+      "end": {
+        "lat": 52.699942,
+        "lon": 15.222975
+      },
+      "length_km": 4.214,
+      "direction": "both",
+      "_source_url": "https://naodcinku.pl/droga-ekspresowa/s3/"
+    },
+    {
+      "id": "OPP_S3_odcinek_s3_parowo",
+      "name": "Odcinek S3 – Parłowo",
+      "road": "S3",
+      "voivodeship": "zachodniopomorskie",
+      "location": "Parłowo, gmina Wolin, powiat kamieński",
+      "limit": 120,
+      "limit_trucks": 80,
+      "start": {
+        "lat": 53.829367,
+        "lon": 14.751264
+      },
+      "end": {
+        "lat": 53.796444,
+        "lon": 14.77675
+      },
+      "length_km": 4.092,
+      "direction": "both",
+      "_source_url": "https://naodcinku.pl/droga-ekspresowa/s3/"
+    },
+    {
+      "id": "OPP_S6_odcinek_s6_rosciecino",
+      "name": "Odcinek S6 – Rościęcino",
+      "road": "S6",
+      "voivodeship": "zachodniopomorskie",
+      "location": "Rościęcino, gmina Kołobrzeg, powiat kołobrzeski",
+      "limit": 120,
+      "limit_trucks": 80,
+      "start": {
+        "lat": 54.131044,
+        "lon": 15.578978
+      },
+      "end": {
+        "lat": 54.156056,
+        "lon": 15.5979
+      },
+      "length_km": 3.04,
+      "direction": "both",
+      "_source_url": "https://naodcinku.pl/droga-ekspresowa/s6/"
+    },
+    {
+      "id": "OPP_S6_odcinek_s6_dobrzyca",
+      "name": "Odcinek S6 – Dobrzyca",
+      "road": "S6",
+      "voivodeship": "zachodniopomorskie",
+      "location": "Dobrzyca, gmina Będzino, powiat koszaliński",
+      "limit": 120,
+      "limit_trucks": 80,
+      "start": {
+        "lat": 54.202444,
+        "lon": 15.919947
+      },
+      "end": {
+        "lat": 54.188408,
+        "lon": 16.105144
+      },
+      "length_km": 12.218,
+      "direction": "both",
+      "_source_url": "https://naodcinku.pl/droga-ekspresowa/s6/"
+    },
+    {
+      "id": "OPP_S7_odcinek_s7_falecice",
+      "name": "Odcinek S7 – Falęcice",
+      "road": "S7",
+      "voivodeship": "",
+      "location": "Falęcice, gmina Promna, powiat białobrzeski",
+      "limit": 120,
+      "limit_trucks": 80,
+      "start": {
+        "lat": 51.665833,
+        "lon": 20.955417
+      },
+      "end": {
+        "lat": 51.555472,
+        "lon": 21.033778
+      },
+      "length_km": 0.0,
+      "direction": "both",
+      "_source_url": "https://naodcinku.pl/droga-ekspresowa/s7/"
+    },
+    {
+      "id": "OPP_S7_odcinek_tunel_s7_wyjazd_naprawa_wyjazd_s",
+      "name": "Odcinek Tunel S7 – wyjazd Naprawa / wyjazd Skomielna B.",
+      "road": "S7",
+      "voivodeship": "",
+      "location": "Skomielna Biała, gmina Lubień, powiat myślenicki",
+      "limit": 100,
+      "limit_trucks": 80,
+      "start": {
+        "lat": 49.650999,
+        "lon": 19.904556
+      },
+      "end": {
+        "lat": 49.667167,
+        "lon": 19.889944
+      },
+      "length_km": 0.0,
+      "direction": "both",
+      "_source_url": "https://naodcinku.pl/droga-ekspresowa/s7/"
+    },
+    {
+      "id": "OPP_S7_odcinek_s7_kopana",
+      "name": "Odcinek S7 – Kopana",
+      "road": "S7",
+      "voivodeship": "",
+      "location": "Kopana, gmina Tarczyn, powiat piaseczyński",
+      "limit": 120,
+      "limit_trucks": 80,
+      "start": {
+        "lat": 51.940111,
+        "lon": 20.846417
+      },
+      "end": {
+        "lat": 51.874861,
+        "lon": 20.854167
+      },
+      "length_km": 0.422,
+      "direction": "both",
+      "_source_url": "https://naodcinku.pl/droga-ekspresowa/s7/"
+    },
+    {
+      "id": "OPP_S7_odcinek_s7_kepiny",
+      "name": "Odcinek S7 – Kępiny",
+      "road": "S7",
+      "voivodeship": "",
+      "location": "Kępiny, gmina Jedlińsk, powiat radomski",
+      "limit": 120,
+      "limit_trucks": 80,
+      "start": {
+        "lat": 51.529389,
+        "lon": 21.081972
+      },
+      "end": {
+        "lat": 51.394028,
+        "lon": 21.022222
+      },
+      "length_km": 15.917,
+      "direction": "both",
+      "_source_url": "https://naodcinku.pl/droga-ekspresowa/s7/"
+    },
+    {
+      "id": "OPP_S7_odcinek_s7_rychnowo",
+      "name": "Odcinek S7 – Rychnowo",
+      "road": "S7",
+      "voivodeship": "",
+      "location": "Rychnowo, gmina Grunwald, powiat ostródzki",
+      "limit": 120,
+      "limit_trucks": 80,
+      "start": {
+        "lat": 53.596278,
+        "lon": 20.090344
+      },
+      "end": {
+        "lat": 53.58625,
+        "lon": 20.244
+      },
+      "length_km": 10.363,
+      "direction": "both",
+      "_source_url": "https://naodcinku.pl/droga-ekspresowa/s7/"
+    },
+    {
+      "id": "OPP_S7_odcinek_s7_krosno_pasek",
+      "name": "Odcinek S7 – Krosno / Pasłęk",
+      "road": "S7",
+      "voivodeship": "",
+      "location": "Krosno, gmina Pasłęk, powiat elbląski",
+      "limit": 120,
+      "limit_trucks": 80,
+      "start": {
+        "lat": 54.0709,
+        "lon": 19.618603
+      },
+      "end": {
+        "lat": 53.981975,
+        "lon": 19.696683
+      },
+      "length_km": 11.543,
+      "direction": "both",
+      "_source_url": "https://naodcinku.pl/droga-ekspresowa/s7/"
+    },
+    {
+      "id": "OPP_S8_odcinek_warszawa_marki",
+      "name": "Odcinek Warszawa – Marki",
+      "road": "S8",
+      "voivodeship": "",
+      "location": "Warszawa / Marki",
+      "limit": 120,
+      "limit_trucks": 80,
+      "start": {
+        "lat": 52.302528,
+        "lon": 21.044861
+      },
+      "end": {
+        "lat": 52.30725,
+        "lon": 21.102694
+      },
+      "length_km": 4.041,
+      "direction": "both",
+      "_source_url": "https://naodcinku.pl/droga-ekspresowa/s8/"
+    },
+    {
+      "id": "OPP_S8_odcinek_macierzysz_kierunek_marki",
+      "name": "Odcinek Macierzysz – kierunek Marki",
+      "road": "S8",
+      "voivodeship": "",
+      "location": "Macierzysz / Ożarów Mazowiecki",
+      "limit": 120,
+      "limit_trucks": 80,
+      "start": {
+        "lat": 52.218028,
+        "lon": 20.867286
+      },
+      "end": {
+        "lat": 52.242264,
+        "lon": 20.891725
+      },
+      "length_km": 3.082,
+      "direction": "both",
+      "_source_url": "https://naodcinku.pl/droga-ekspresowa/s8/"
+    },
+    {
+      "id": "OPP_S8_odcinek_wyszkow_kierunek_ostrow_mazowiec",
+      "name": "Odcinek Wyszków – kierunek Ostrów Mazowiecka",
+      "road": "S8",
+      "voivodeship": "",
+      "location": "Wyszków",
+      "limit": 120,
+      "limit_trucks": 80,
+      "start": {
+        "lat": 52.5558,
+        "lon": 21.456178
+      },
+      "end": {
+        "lat": 52.604833,
+        "lon": 21.49585
+      },
+      "length_km": 6.809,
+      "direction": "both",
+      "_source_url": "https://naodcinku.pl/droga-ekspresowa/s8/"
+    },
+    {
+      "id": "OPP_S8_odcinek_wyszkow_kierunek_warszawa",
+      "name": "Odcinek Wyszków – kierunek Warszawa",
+      "road": "S8",
+      "voivodeship": "",
+      "location": "Wyszków",
+      "limit": 120,
+      "limit_trucks": 80,
+      "start": {
+        "lat": 52.5558,
+        "lon": 21.456178
+      },
+      "end": {
+        "lat": 52.604833,
+        "lon": 21.49585
+      },
+      "length_km": 6.789,
+      "direction": "both",
+      "_source_url": "https://naodcinku.pl/droga-ekspresowa/s8/"
+    },
+    {
+      "id": "OPP_S8_odcinek_ostrow_mazowiecka_kierunek_warsz",
+      "name": "Odcinek Ostrów Mazowiecka – kierunek Warszawa",
+      "road": "S8",
+      "voivodeship": "",
+      "location": "Ostrów Mazowiecka",
+      "limit": 120,
+      "limit_trucks": 80,
+      "start": {
+        "lat": 52.808919,
+        "lon": 21.876642
+      },
+      "end": {
+        "lat": 52.820642,
+        "lon": 21.905558
+      },
+      "length_km": 2.614,
+      "direction": "both",
+      "_source_url": "https://naodcinku.pl/droga-ekspresowa/s8/"
+    },
+    {
+      "id": "OPP_S8_odcinek_ostrow_mazowiecka_kierunek_biays",
+      "name": "Odcinek Ostrów Mazowiecka – kierunek Białystok",
+      "road": "S8",
+      "voivodeship": "",
+      "location": "Ostrów Mazowiecka",
+      "limit": 120,
+      "limit_trucks": 80,
+      "start": {
+        "lat": 52.808917,
+        "lon": 21.876667
+      },
+      "end": {
+        "lat": 52.820639,
+        "lon": 21.905556
+      },
+      "length_km": 2.595,
+      "direction": "both",
+      "_source_url": "https://naodcinku.pl/droga-ekspresowa/s8/"
+    },
+    {
+      "id": "OPP_S8_odcinek_nowe_grocholice_kierunek_warszaw",
+      "name": "Odcinek Nowe Grocholice – kierunek Warszawa",
+      "road": "S8",
+      "voivodeship": "",
+      "location": "Nowe Grocholice",
+      "limit": 120,
+      "limit_trucks": 80,
+      "start": {
+        "lat": 52.161198,
+        "lon": 20.905003
+      },
+      "end": {
+        "lat": 52.144361,
+        "lon": 20.886583
+      },
+      "length_km": 2.263,
+      "direction": "both",
+      "_source_url": "https://naodcinku.pl/droga-ekspresowa/s8/"
+    },
+    {
+      "id": "OPP_S8_odcinek_nowe_grocholice_kierunek_janek",
+      "name": "Odcinek Nowe Grocholice – kierunek Janek",
+      "road": "S8",
+      "voivodeship": "",
+      "location": "Nowe Grocholice",
+      "limit": 120,
+      "limit_trucks": 80,
+      "start": {
+        "lat": 52.161194,
+        "lon": 20.905
+      },
+      "end": {
+        "lat": 52.14445,
+        "lon": 20.886389
+      },
+      "length_km": 2.27,
+      "direction": "both",
+      "_source_url": "https://naodcinku.pl/droga-ekspresowa/s8/"
+    },
+    {
+      "id": "OPP_S8_odcinek_s8_nadarzyn",
+      "name": "Odcinek S8 – Nadarzyn",
+      "road": "S8",
+      "voivodeship": "",
+      "location": "Nadarzyn, powiat pruszkowski",
+      "limit": 120,
+      "limit_trucks": 80,
+      "start": {
+        "lat": 52.100667,
+        "lon": 20.823889
+      },
+      "end": {
+        "lat": 52.08225,
+        "lon": 20.792722
+      },
+      "length_km": 3.176,
+      "direction": "both",
+      "_source_url": "https://naodcinku.pl/droga-ekspresowa/s8/"
+    },
+    {
+      "id": "OPP_S8_odcinek_s8_kobyka_zielonka",
+      "name": "Odcinek S8 – Kobyłka / Zielonka",
+      "road": "S8",
+      "voivodeship": "",
+      "location": "Kobyłka (węzeł Wołomin – węzeł Zielonka)",
+      "limit": 120,
+      "limit_trucks": 80,
+      "start": {
+        "lat": 52.326025,
+        "lon": 21.153225
+      },
+      "end": {
+        "lat": 52.388464,
+        "lon": 21.196003
+      },
+      "length_km": 8.136,
+      "direction": "both",
+      "_source_url": "https://naodcinku.pl/droga-ekspresowa/s8/"
+    },
+    {
+      "id": "OPP_S11_odcinek_s11_dabrowa",
+      "name": "Odcinek S11 – Dąbrowa",
+      "road": "S11",
+      "voivodeship": "",
+      "location": "Dąbrowa, gmina Dopiewo, powiat poznański",
+      "limit": 120,
+      "limit_trucks": 80,
+      "start": {
+        "lat": 52.412661,
+        "lon": 16.726372
+      },
+      "end": {
+        "lat": 52.432494,
+        "lon": 16.735511
+      },
+      "length_km": 2.327,
+      "direction": "both",
+      "_source_url": "https://naodcinku.pl/droga-ekspresowa/s11/"
+    },
+    {
+      "id": "OPP_S14_odcinek_s14_petrykozy_dobron",
+      "name": "Odcinek S14 – Petrykozy ↔ Dobroń",
+      "road": "S14",
+      "voivodeship": "łódzkie",
+      "location": "Dobroń / Petrykozy, gmina Dobroń, powiat pabianicki",
+      "limit": 110,
+      "limit_trucks": 80,
+      "start": {
+        "lat": 51.647972,
+        "lon": 19.271111
+      },
+      "end": {
+        "lat": 51.680222,
+        "lon": 19.320972
+      },
+      "length_km": 5.376,
+      "direction": "both",
+      "_source_url": "https://naodcinku.pl/droga-ekspresowa/s14/"
+    },
+    {
+      "id": "OPP_S17_odcinek_s17_garwolin",
+      "name": "Odcinek S17 – Garwolin",
+      "road": "S17",
+      "voivodeship": "",
+      "location": "Garwolin, powiat garwoliński, gmina Garwolin",
+      "limit": 120,
+      "limit_trucks": 80,
+      "start": {
+        "lat": 51.891083,
+        "lon": 21.578917
+      },
+      "end": {
+        "lat": 51.860972,
+        "lon": 21.574583
+      },
+      "length_km": 0.205,
+      "direction": "both",
+      "_source_url": "https://naodcinku.pl/droga-ekspresowa/s17/"
+    },
+    {
+      "id": "OPP_S51_odcinek_s51_olsztyn_poudnie_olsztynek_ws",
+      "name": "Odcinek S51 – Olsztyn Południe ↔ Olsztynek Wschód",
+      "road": "S51",
+      "voivodeship": "warmińsko-mazurskie",
+      "location": "Tomaszkowo, gmina Stawiguda, powiat olsztyński",
+      "limit": 120,
+      "limit_trucks": 80,
+      "start": {
+        "lat": 53.706111,
+        "lon": 20.421111
+      },
+      "end": {
+        "lat": 53.607222,
+        "lon": 20.315556
+      },
+      "length_km": 13.319,
+      "direction": "both",
+      "_source_url": "https://naodcinku.pl/droga-ekspresowa/s51/"
+    },
+    {
+      "id": "OPP_S52_odcinek_s52_krakow_zielonki",
+      "name": "Odcinek S52 – Kraków ↔ Zielonki",
+      "road": "S52",
+      "voivodeship": "małopolskie",
+      "location": "Kraków / Zielonki",
+      "limit": 80,
+      "limit_trucks": 80,
+      "start": {
+        "lat": 50.112528,
+        "lon": 19.928639
+      },
+      "end": {
+        "lat": 50.114306,
+        "lon": 19.913417
+      },
+      "length_km": 0.234,
+      "direction": "both",
+      "_source_url": "https://naodcinku.pl/droga-ekspresowa/s52/"
+    }
+  ],
   "cameras": []
 }
