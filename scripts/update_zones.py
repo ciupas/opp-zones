@@ -29,6 +29,12 @@ HEADERS    = {
 }
 SLEEP_BETWEEN = 1.5
 
+# Overpass API — fotoradary w Polsce
+OVERPASS_URL       = 'https://overpass-api.de/api/interpreter'
+OVERPASS_HEADERS   = {'User-Agent': 'OPP-Monitor/1.0 (github.com/ciupas/opp-zones; pciupinski@gmail.com)'}
+# Bounding box Polski: south, west, north, east
+POLAND_BBOX        = (49.0, 14.1, 54.9, 24.1)
+
 ROADS = [
     ('autostrada',       ['a1', 'a2', 'a4', 'a8']),
     ('droga-ekspresowa', ['s2', 's3', 's6', 's7', 's8', 's11', 's14', 's17', 's51', 's52']),
@@ -220,6 +226,116 @@ def scrape_road(road_type: str, road: str) -> list[dict]:
     return zones
 
 
+# ── Cameras (OpenStreetMap / Overpass) ───────────────────────
+
+def _overpass_query(query: str) -> list[dict]:
+    """Wykonaj zapytanie Overpass, zwróć listę elementów."""
+    try:
+        r = requests.get(OVERPASS_URL, params={'data': query},
+                         headers=OVERPASS_HEADERS, timeout=120)
+        r.raise_for_status()
+        return r.json().get('elements', [])
+    except Exception as exc:
+        log.warning(f"Błąd Overpass API: {exc}")
+        return []
+
+
+def scrape_cameras_osm() -> list[dict]:
+    """Pobierz fotoradary z OpenStreetMap przez Overpass API.
+
+    Polska jest dzielona na 4 ćwiartki żeby uniknąć timeoutu Overpass.
+    """
+    log.info("Pobieranie fotoradarów z OpenStreetMap (Overpass API)…")
+
+    # Podział Polski na 4 regiony: (south, west, north, east)
+    regions = [
+        (52.0, 14.1, 54.9, 19.0),   # NW
+        (52.0, 19.0, 54.9, 24.1),   # NE
+        (49.0, 14.1, 52.0, 19.0),   # SW
+        (49.0, 19.0, 52.0, 24.1),   # SE
+    ]
+
+    all_elements: list[dict] = []
+    for i, (s, w, n, e) in enumerate(regions, 1):
+        query = (
+            f'[out:json][timeout:60];'
+            f'node["highway"="speed_camera"]({s},{w},{n},{e});'
+            f'out body;'
+        )
+        log.info(f"  Region {i}/4 ({s},{w} → {n},{e})…")
+        elements = _overpass_query(query)
+        log.info(f"    {len(elements)} węzłów")
+        all_elements.extend(elements)
+        if i < len(regions):
+            time.sleep(2)
+
+    log.info(f"Łącznie pobrano {len(all_elements)} fotoradarów z OSM")
+
+    cameras = []
+    seen_ids: set[int] = set()
+    for el in all_elements:
+        if el.get('type') != 'node':
+            continue
+        osm_id = el['id']
+        if osm_id in seen_ids:
+            continue
+        seen_ids.add(osm_id)
+        tags = el.get('tags', {})
+
+        limit = 0
+        raw = tags.get('maxspeed', '')
+        m = re.search(r'(\d+)', raw)
+        if m:
+            limit = int(m.group(1))
+
+        direction = tags.get('direction', '')
+        try:
+            direction = int(direction)
+        except (ValueError, TypeError):
+            direction = None
+
+        cameras.append({
+            "id":          f"CAM_{osm_id}",
+            "lat":         el['lat'],
+            "lon":         el['lon'],
+            "limit":       limit,
+            "direction":   direction,
+            "enforcement": tags.get('enforcement', 'maxspeed'),
+            "ref":         tags.get('ref', ''),
+            "operator":    tags.get('operator', ''),
+            "_osm_id":     osm_id,
+            "_source":     "OpenStreetMap",
+        })
+
+    log.info(f"Pobrano {len(cameras)} fotoradarów z OSM")
+    return cameras
+
+
+def merge_cameras(existing: list[dict], scraped: list[dict]) -> tuple[list[dict], int]:
+    existing_by_id = {c['id']: c for c in existing}
+    changes = 0
+    merged  = list(existing)
+
+    for sc in scraped:
+        sid = sc['id']
+        if sid not in existing_by_id:
+            merged.append(sc)
+            changes += 1
+        else:
+            ec      = existing_by_id[sid]
+            updated = False
+            if sc['limit'] > 0 and sc['limit'] != ec.get('limit'):
+                ec['limit'] = sc['limit']
+                updated = True
+            if sc['direction'] is not None and sc['direction'] != ec.get('direction'):
+                ec['direction'] = sc['direction']
+                updated = True
+            if updated:
+                changes += 1
+
+    return merged, changes
+
+
 # ── Merging ───────────────────────────────────────────────────
 
 def merge_zones(existing: list[dict], scraped: list[dict]) -> tuple[list[dict], int]:
@@ -264,30 +380,39 @@ def main():
     log.info("═══ OPP Zones Updater ═══")
     log.info(f"Plik docelowy: {ZONES_FILE}")
 
-    data           = load_existing()
-    existing_zones = data.get('zones', [])
-    log.info(f"Aktualna liczba stref: {len(existing_zones)}")
+    data            = load_existing()
+    existing_zones  = data.get('zones', [])
+    existing_cameras = data.get('cameras', [])
+    log.info(f"Aktualne dane: {len(existing_zones)} stref, {len(existing_cameras)} fotoradarów")
 
+    # ── OPP strefy ────────────────────────────────────────────
     all_scraped = []
     for road_type, roads in ROADS:
         for road in roads:
             all_scraped.extend(scrape_road(road_type, road))
-
-    log.info(f"Zescrapowano łącznie {len(all_scraped)} stref")
+    log.info(f"Zescrapowano łącznie {len(all_scraped)} stref OPP")
 
     if not all_scraped:
         log.error("Nie udało się pobrać żadnych stref — przerywam")
         return
 
-    merged, changes = merge_zones(existing_zones, all_scraped)
+    merged_zones, zone_changes = merge_zones(existing_zones, all_scraped)
 
-    if changes == 0:
+    # ── Fotoradary OSM ────────────────────────────────────────
+    scraped_cameras = scrape_cameras_osm()
+    merged_cameras, cam_changes = merge_cameras(existing_cameras, scraped_cameras)
+
+    # ── Zapis ─────────────────────────────────────────────────
+    total_changes = zone_changes + cam_changes
+    if total_changes == 0:
         log.info("Brak zmian — zones.json jest aktualny")
     else:
-        log.info(f"Wykryto {changes} zmian — zapisuję zones.json")
-        data['zones']   = merged
-        data['source']  = 'CANARD/GITD via naodcinku.pl (auto-scrape)'
-        data['version'] = '2.1'
+        log.info(f"Zmiany: {zone_changes} stref, {cam_changes} fotoradarów — zapisuję")
+        data['zones']           = merged_zones
+        data['cameras']         = merged_cameras
+        data['total_cameras']   = len(merged_cameras)
+        data['source']          = 'OPP: naodcinku.pl | Kamery: OpenStreetMap (Overpass)'
+        data['version']         = '2.1'
         save(data)
 
     log.info("═══ Koniec ═══")
