@@ -1,49 +1,56 @@
 #!/usr/bin/env python3
 """
 OPP Zones Auto-Updater
-Scrape odcinkowy.pl i naodcinku.pl,
-porównaj z aktualnym zones.json,
-zapisz zaktualizowaną wersję.
+Scrape naodcinku.pl (source: CANARD/GITD),
+porównaj z aktualnym zones.json, zapisz zaktualizowaną wersję.
 """
 
 import json
 import re
 import time
 import logging
+import unicodedata
 from datetime import date
 from pathlib import Path
 
 import requests
 from bs4 import BeautifulSoup
 
-# ── Konfiguracja ──────────────────────────────────────────────
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s [%(levelname)s] %(message)s'
-)
+logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s] %(message)s')
 log = logging.getLogger(__name__)
 
-ZONES_FILE   = Path(__file__).parent.parent / 'zones.json'
-SOURCE_URL   = 'https://odcinkowy.pl/odcinki/'
-HEADERS      = {
-    'User-Agent': 'Mozilla/5.0 (compatible; OPP-Monitor-Bot/1.0; '
-                  '+https://github.com/opp-monitor)'
+ZONES_FILE = Path(__file__).parent.parent / 'zones.json'
+BASE_URL   = 'https://naodcinku.pl'
+HEADERS    = {
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 '
+                  '(KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
+    'Accept':          'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+    'Accept-Language': 'pl-PL,pl;q=0.9,en;q=0.7',
 }
-SLEEP_BETWEEN = 1.5   # sekund między requestami — bądź grzeczny!
+SLEEP_BETWEEN = 1.5
 
-# ── Pomocnicze ────────────────────────────────────────────────
+ROADS = [
+    ('autostrada',       ['a1', 'a2', 'a4', 'a8']),
+    ('droga-ekspresowa', ['s2', 's3', 's6', 's7', 's8', 's11', 's14', 's17', 's51', 's52']),
+]
+
+SKIP_HEADINGS = re.compile(
+    r'odcinkowy\s*pomiar|autostrady|ekspresowe|menu|nawigacja|mapa|kontakt|strona\s*g',
+    re.I
+)
+
+
+# ── Helpers ───────────────────────────────────────────────────
 
 def load_existing() -> dict:
-    """Wczytaj aktualny zones.json."""
     if ZONES_FILE.exists():
         with open(ZONES_FILE, encoding='utf-8') as f:
             return json.load(f)
-    return {"version": "1.0", "zones": [], "cameras": []}
+    return {"version": "2.1", "zones": [], "cameras": []}
 
 
 def save(data: dict):
-    """Zapisz zaktualizowany zones.json."""
-    data['updated'] = str(date.today())
+    data['updated']     = str(date.today())
     data['total_zones'] = len(data['zones'])
     with open(ZONES_FILE, 'w', encoding='utf-8') as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
@@ -51,7 +58,6 @@ def save(data: dict):
 
 
 def get_soup(url: str) -> BeautifulSoup | None:
-    """Pobierz stronę i zwróć BeautifulSoup."""
     try:
         r = requests.get(url, headers=HEADERS, timeout=15)
         r.raise_for_status()
@@ -61,232 +67,189 @@ def get_soup(url: str) -> BeautifulSoup | None:
         return None
 
 
-def parse_limit(text: str) -> int:
-    """Wyciągnij limit prędkości z tekstu np. '120 km/h' → 120."""
-    m = re.search(r'(\d+)\s*km/h', text, re.IGNORECASE)
-    return int(m.group(1)) if m else 120
+def slugify(text: str) -> str:
+    text = unicodedata.normalize('NFD', text)
+    text = text.encode('ascii', 'ignore').decode()
+    text = re.sub(r'[^\w\s-]', '', text.lower())
+    return re.sub(r'[\s-]+', '_', text).strip('_')[:40]
 
 
-def parse_length(text: str) -> float:
-    """Wyciągnij długość z tekstu np. '14,5 km' → 14.5."""
-    m = re.search(r'([\d,\.]+)\s*km', text, re.IGNORECASE)
+def parse_coord_pair(text: str) -> tuple[float, float] | None:
+    m = re.search(r'(\d{2}\.\d{4,})[,\s]+(\d{2}\.\d{4,})', text)
     if m:
-        return float(m.group(1).replace(',', '.'))
+        return float(m.group(1)), float(m.group(2))
+    return None
+
+
+def parse_length_m(text: str) -> float:
+    """
+    Polish number formatting:
+      '14,061 m'  → 14061  (comma = thousands separator)
+      '4 041 m'   → 4041   (space = thousands separator)
+      '7.422 km'  → 7422
+    """
+    m = re.search(r'([\d\.]+)\s*km\b', text, re.I)
+    if m:
+        try:
+            return float(m.group(1)) * 1000
+        except ValueError:
+            pass
+    m = re.search(r'(\d(?:[\d ,]*\d)?)\s*m\b', text)
+    if m:
+        s = m.group(1).replace(' ', '').replace(',', '')
+        try:
+            v = float(s)
+            if v > 100:
+                return v
+        except ValueError:
+            pass
     return 0.0
 
 
-# ── Scraper odcinkowy.pl ──────────────────────────────────────
+# ── Scraper ───────────────────────────────────────────────────
 
-def scrape_zone_list() -> list[dict]:
-    """
-    Pobierz listę wszystkich stref z odcinkowy.pl/odcinki/
-    Zwraca listę słowników z podstawowymi danymi i URL strony szczegółowej.
-    """
-    log.info(f"Pobieranie listy stref z {SOURCE_URL}")
-    soup = get_soup(SOURCE_URL)
+def scrape_road(road_type: str, road: str) -> list[dict]:
+    url = f"{BASE_URL}/{road_type}/{road}/"
+    time.sleep(SLEEP_BETWEEN)
+    log.info(f"Pobieranie {url}")
+    soup = get_soup(url)
     if not soup:
         return []
 
-    zones = []
-    # Szukaj linków do stron poszczególnych odcinków
-    for link in soup.select('a[href*="/odcinki/"]'):
-        href = link.get('href', '')
-        # Pomijamy stronę główną listy
-        if href.endswith('/odcinki/') or href == SOURCE_URL:
+    zones: list[dict] = []
+    seen_names: set[str] = set()
+
+    for heading in soup.find_all(['h2', 'h3']):
+        raw_name = heading.get_text(strip=True)
+        if len(raw_name) < 4 or SKIP_HEADINGS.search(raw_name):
             continue
 
-        # Wyciągnij ID z URL np. /odcinki/33-wezel-minsk-mazowiecki-wezel-janow/
-        m = re.search(r'/odcinki/(\d+)-(.+?)/?$', href)
-        if not m:
+        # Deduplicate: ignore direction suffix in parentheses
+        base_name = raw_name.split('(')[0].strip()
+        if base_name in seen_names:
             continue
+        seen_names.add(base_name)
 
-        zone_id_num = m.group(1)
-        slug = m.group(2)
-
-        # Ustal pełny URL
-        url = href if href.startswith('http') else f"https://odcinkowy.pl{href}"
-
-        zones.append({
-            '_id_num': zone_id_num,
-            '_slug':   slug,
-            '_url':    url,
-        })
-
-    log.info(f"Znaleziono {len(zones)} odcinków na liście")
-    return zones
-
-
-def scrape_zone_detail(zone_stub: dict) -> dict | None:
-    """
-    Pobierz szczegóły jednej strefy OPP ze strony odcinkowy.pl.
-    Zwraca słownik gotowy do wstawienia do zones.json.
-    """
-    url = zone_stub['_url']
-    time.sleep(SLEEP_BETWEEN)
-    soup = get_soup(url)
-    if not soup:
-        return None
-
-    try:
-        # Nazwa strefy — zazwyczaj w <h1>
-        h1 = soup.find('h1')
-        name = h1.get_text(strip=True) if h1 else zone_stub['_slug'].replace('-', ' ').title()
-
-        # Droga (np. "A4", "S7", "DK50")
-        road = ''
-        for tag in soup.find_all(['span', 'td', 'li', 'p']):
-            t = tag.get_text(strip=True)
-            m = re.match(r'^(A\d+|S\d+|DK\d+|DW\d+|DG\d+)$', t)
-            if m:
-                road = m.group(1)
+        # Collect sibling text until the next heading
+        text_blocks = []
+        for sibling in heading.next_siblings:
+            if getattr(sibling, 'name', None) in ['h2', 'h3']:
                 break
+            if hasattr(sibling, 'get_text'):
+                text_blocks.append(sibling.get_text('\n', strip=True))
+        text = '\n'.join(text_blocks)
 
-        # Województwo
+        if not text or len(text) < 20:
+            continue
+
+        lines = text.split('\n')
+
+        # Voivodeship
         voivodeship = ''
-        for tag in soup.find_all(string=re.compile(r'województwo', re.I)):
-            parent = tag.parent
-            if parent:
-                vt = parent.get_text(strip=True).lower()
-                for woj in ['mazowieckie','małopolskie','śląskie','dolnośląskie',
-                            'wielkopolskie','łódzkie','lubelskie','podkarpackie',
-                            'podlaskie','warmińsko-mazurskie','pomorskie',
-                            'kujawsko-pomorskie','zachodniopomorskie','lubuskie',
-                            'opolskie','świętokrzyskie']:
-                    if woj in vt:
-                        voivodeship = woj
-                        break
-            if voivodeship:
-                break
+        m = re.search(r'Wojew[oó]dztwo[:\s]+([^\n]+)', text, re.I)
+        if m:
+            voivodeship = m.group(1).strip().lower()
 
-        # Limit prędkości
+        # Location
+        location = ''
+        m = re.search(r'Lokalizacja[:\s]+([^\n]+)', text, re.I)
+        if m:
+            location = m.group(1).strip()
+
+        # Speed limits
         limit = 120
-        for tag in soup.find_all(string=re.compile(r'km/h', re.I)):
-            limit = parse_limit(str(tag))
-            break
+        m = re.search(r'osobowe[^\d]+(\d+)\s*km/h', text, re.I)
+        if m:
+            limit = int(m.group(1))
+        elif (m := re.search(r'(\d+)\s*km/h', text)):
+            limit = int(m.group(1))
 
-        # Długość
+        limit_trucks = 80
+        m = re.search(r'ci[eę][żz]arowe[^\d]+(\d+)\s*km/h', text, re.I)
+        if m:
+            limit_trucks = int(m.group(1))
+
+        # Length — first valid occurrence in a "Długość" line
         length_km = 0.0
-        for tag in soup.find_all(string=re.compile(r'\d[\d,\.]+\s*km', re.I)):
-            v = parse_length(str(tag))
-            if v > 0:
-                length_km = v
-                break
+        for line in lines:
+            if re.search(r'D[łl]ugo[śs][ćc]', line, re.I):
+                lm = parse_length_m(line)
+                if lm > 0:
+                    length_km = round(lm / 1000, 3)
+                    break
 
-        # Współrzędne — szukaj Google Maps linku lub meta
-        start_lat, start_lon = 0.0, 0.0
-        end_lat, end_lon     = 0.0, 0.0
+        # Coordinates — prefer labelled "Start:" / "Koniec:" lines
+        start_lat = start_lon = end_lat = end_lon = 0.0
+        for line in lines:
+            if re.search(r'^Start[:\s]', line, re.I) and start_lat == 0.0:
+                c = parse_coord_pair(line)
+                if c:
+                    start_lat, start_lon = c
+            elif re.search(r'^Koniec[:\s]', line, re.I) and end_lat == 0.0:
+                c = parse_coord_pair(line)
+                if c:
+                    end_lat, end_lon = c
 
-        # Próba 1: link do Google Maps z współrzędnymi
-        for a in soup.find_all('a', href=re.compile(r'maps\.google|google\.com/maps')):
-            href = a.get('href', '')
-            coords = re.findall(r'[-\d]+\.[\d]+,[-\d]+\.[\d]+', href)
-            if len(coords) >= 2:
-                s = coords[0].split(',')
-                e = coords[1].split(',')
-                start_lat, start_lon = float(s[0]), float(s[1])
-                end_lat, end_lon     = float(e[0]), float(e[1])
-                break
-            elif len(coords) == 1:
-                s = coords[0].split(',')
-                start_lat, start_lon = float(s[0]), float(s[1])
-
-        # Próba 2: dane JSON-LD lub meta og:
-        for script in soup.find_all('script', type='application/ld+json'):
-            try:
-                ld = json.loads(script.string)
-                if 'geo' in str(ld):
-                    # uproszczone — wyciągnij pierwsze koordynaty
-                    lats = re.findall(r'"latitude":\s*([\d\.]+)', script.string)
-                    lons = re.findall(r'"longitude":\s*([\d\.]+)', script.string)
-                    if lats and lons:
-                        start_lat = float(lats[0])
-                        start_lon = float(lons[0])
-                    if len(lats) > 1:
-                        end_lat = float(lats[1])
-                        end_lon = float(lons[1])
-            except Exception:
-                pass
-
-        # Data aktywacji
-        activated = ''
-        for tag in soup.find_all(string=re.compile(r'aktywowa|uruchom|włączon', re.I)):
-            m = re.search(r'(\d{4}-\d{2}-\d{2})', str(tag.parent))
-            if m:
-                activated = m.group(1)
-                break
+        # Fallback: first and last coord pair anywhere in the block
+        if start_lat == 0.0:
+            all_coords = re.findall(r'(\d{2}\.\d{4,})[,\s]+(\d{2}\.\d{4,})', text)
+            if len(all_coords) >= 2:
+                start_lat, start_lon = float(all_coords[0][0]),  float(all_coords[0][1])
+                end_lat,   end_lon   = float(all_coords[-1][0]), float(all_coords[-1][1])
+            elif len(all_coords) == 1:
+                start_lat, start_lon = float(all_coords[0][0]), float(all_coords[0][1])
 
         zone = {
-            "id":           f"OPP_{road}_{zone_stub['_id_num']:>03}",
-            "name":         name,
-            "road":         road,
+            "id":           f"OPP_{road.upper()}_{slugify(base_name)}",
+            "name":         base_name,
+            "road":         road.upper(),
             "voivodeship":  voivodeship,
+            "location":     location,
             "limit":        limit,
+            "limit_trucks": limit_trucks,
             "start":        {"lat": start_lat, "lon": start_lon},
             "end":          {"lat": end_lat,   "lon": end_lon},
             "length_km":    length_km,
             "direction":    "both",
             "_source_url":  url,
         }
-        if activated:
-            zone["activated"] = activated
+        zones.append(zone)
+        log.info(f"  ✓ {base_name[:50]} ({road.upper()}, {limit} km/h, {length_km} km)")
 
-        log.info(f"  ✓ {name[:60]} ({road}, {limit} km/h, {length_km} km)")
-        return zone
-
-    except Exception as e:
-        log.warning(f"Błąd parsowania {url}: {e}")
-        return None
+    log.info(f"  → {len(zones)} stref na {road.upper()}")
+    return zones
 
 
 # ── Merging ───────────────────────────────────────────────────
 
 def merge_zones(existing: list[dict], scraped: list[dict]) -> tuple[list[dict], int]:
-    """
-    Połącz istniejące strefy z nowo zescrapowanymi.
-    Priorytet:
-      - Zachowaj ręcznie zweryfikowane koordynaty (start.lat != 0)
-      - Dodaj nowe strefy
-      - Zaktualizuj limit/długość jeśli się zmieniły
-    Zwraca (merged_list, liczba_zmian).
-    """
-    # Indeks istniejących po ID
     existing_by_id = {z['id']: z for z in existing}
     changes = 0
-    merged  = list(existing)  # zacznij od kopii
+    merged  = list(existing)
 
-    for scraped_zone in scraped:
-        sid = scraped_zone['id']
-
+    for sz in scraped:
+        sid = sz['id']
         if sid not in existing_by_id:
-            # Nowa strefa
-            log.info(f"  + NOWA strefa: {scraped_zone['name']}")
-            merged.append(scraped_zone)
+            log.info(f"  + NOWA strefa: {sz['name']}")
+            merged.append(sz)
             changes += 1
         else:
-            # Istniejąca — sprawdź zmiany w limicie i długości
-            existing_zone = existing_by_id[sid]
+            ez      = existing_by_id[sid]
             updated = False
 
-            if (scraped_zone['limit'] != existing_zone.get('limit')
-                    and scraped_zone['limit'] > 0):
-                log.info(f"  ~ Zmiana limitu {sid}: "
-                         f"{existing_zone.get('limit')} → {scraped_zone['limit']}")
-                existing_zone['limit'] = scraped_zone['limit']
+            if sz['limit'] != ez.get('limit') and sz['limit'] > 0:
+                log.info(f"  ~ Zmiana limitu {sid}: {ez.get('limit')} → {sz['limit']}")
+                ez['limit'] = sz['limit']
                 updated = True
 
-            if (scraped_zone['length_km'] > 0
-                    and abs(scraped_zone['length_km']
-                            - existing_zone.get('length_km', 0)) > 0.2):
-                log.info(f"  ~ Zmiana długości {sid}: "
-                         f"{existing_zone.get('length_km')} → {scraped_zone['length_km']}")
-                existing_zone['length_km'] = scraped_zone['length_km']
+            if sz['length_km'] > 0 and abs(sz['length_km'] - ez.get('length_km', 0)) > 0.05:
+                log.info(f"  ~ Zmiana długości {sid}: {ez.get('length_km')} → {sz['length_km']}")
+                ez['length_km'] = sz['length_km']
                 updated = True
 
-            # Uzupełnij współrzędne jeśli brakuje
-            if (existing_zone.get('start', {}).get('lat', 0) == 0
-                    and scraped_zone['start']['lat'] != 0):
-                existing_zone['start'] = scraped_zone['start']
-                existing_zone['end']   = scraped_zone['end']
+            if ez.get('start', {}).get('lat', 0) == 0 and sz['start']['lat'] != 0:
+                ez['start'] = sz['start']
+                ez['end']   = sz['end']
                 updated = True
 
             if updated:
@@ -295,42 +258,35 @@ def merge_zones(existing: list[dict], scraped: list[dict]) -> tuple[list[dict], 
     return merged, changes
 
 
-# ── Główna funkcja ────────────────────────────────────────────
+# ── Main ──────────────────────────────────────────────────────
 
 def main():
     log.info("═══ OPP Zones Updater ═══")
     log.info(f"Plik docelowy: {ZONES_FILE}")
 
-    # Wczytaj aktualne dane
-    data = load_existing()
+    data           = load_existing()
     existing_zones = data.get('zones', [])
     log.info(f"Aktualna liczba stref: {len(existing_zones)}")
 
-    # Scrape listy stref
-    zone_stubs = scrape_zone_list()
-    if not zone_stubs:
-        log.error("Nie udało się pobrać listy stref — przerywam")
+    all_scraped = []
+    for road_type, roads in ROADS:
+        for road in roads:
+            all_scraped.extend(scrape_road(road_type, road))
+
+    log.info(f"Zescrapowano łącznie {len(all_scraped)} stref")
+
+    if not all_scraped:
+        log.error("Nie udało się pobrać żadnych stref — przerywam")
         return
 
-    # Scrape szczegółów każdej strefy
-    scraped_zones = []
-    for i, stub in enumerate(zone_stubs):
-        log.info(f"[{i+1}/{len(zone_stubs)}] Pobieranie: {stub['_url']}")
-        detail = scrape_zone_detail(stub)
-        if detail:
-            scraped_zones.append(detail)
-
-    log.info(f"Zescrapowano {len(scraped_zones)} stref")
-
-    # Merge
-    merged, changes = merge_zones(existing_zones, scraped_zones)
+    merged, changes = merge_zones(existing_zones, all_scraped)
 
     if changes == 0:
         log.info("Brak zmian — zones.json jest aktualny")
     else:
         log.info(f"Wykryto {changes} zmian — zapisuję zones.json")
         data['zones']   = merged
-        data['source']  = 'CANARD/GITD + odcinkowy.pl (auto-scrape)'
+        data['source']  = 'CANARD/GITD via naodcinku.pl (auto-scrape)'
         data['version'] = '2.1'
         save(data)
 
