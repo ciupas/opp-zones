@@ -8,6 +8,9 @@ on:
   # Możliwość ręcznego uruchomienia z GitHub UI
   workflow_dispatch:
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
   update-zones:
     runs-on: ubuntu-latest
