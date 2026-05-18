@@ -1,0 +1,64 @@
+name: Aktualizacja bazy OPP
+
+on:
+  # Automatycznie co poniedziałek o 6:00 rano
+  schedule:
+    - cron: '0 6 * * 1'
+
+  # Możliwość ręcznego uruchomienia z GitHub UI
+  workflow_dispatch:
+
+jobs:
+  update-zones:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write  # potrzebne do push
+
+    steps:
+      - name: Pobierz repozytorium
+        uses: actions/checkout@v4
+
+      - name: Ustaw Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Zainstaluj zależności
+        run: |
+          pip install requests beautifulsoup4 lxml
+
+      - name: Uruchom skrypt aktualizacji
+        run: |
+          python scripts/update_zones.py
+
+      - name: Sprawdź czy są zmiany
+        id: check_changes
+        run: |
+          if git diff --quiet zones.json; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+            echo "Brak zmian w bazie OPP"
+          else
+            echo "changed=true" >> $GITHUB_OUTPUT
+            echo "Wykryto zmiany w bazie OPP!"
+            git diff --stat zones.json
+          fi
+
+      - name: Commit i push jeśli są zmiany
+        if: steps.check_changes.outputs.changed == 'true'
+        run: |
+          git config user.name  "OPP Bot"
+          git config user.email "opp-bot@noreply.github.com"
+          git add zones.json
+          git commit -m "🚗 Auto-update bazy OPP $(date '+%Y-%m-%d')"
+          git push
+
+      - name: Podsumowanie
+        run: |
+          echo "### Wynik aktualizacji" >> $GITHUB_STEP_SUMMARY
+          if [ "${{ steps.check_changes.outputs.changed }}" == "true" ]; then
+            echo "✅ Baza OPP zaktualizowana!" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "ℹ️ Brak zmian — baza aktualna" >> $GITHUB_STEP_SUMMARY
+          fi
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Liczba stref: $(python -c "import json; d=json.load(open('zones.json')); print(len(d['zones']))")" >> $GITHUB_STEP_SUMMARY
