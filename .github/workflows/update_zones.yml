@@ -22,10 +22,11 @@ jobs:
         uses: actions/setup-python@v6
         with:
           python-version: '3.11'
+          cache: 'pip'
 
       - name: Zainstaluj zależności
         run: |
-          pip install requests beautifulsoup4 lxml
+          pip install -r requirements.txt
 
       - name: Uruchom skrypt aktualizacji
         run: |
