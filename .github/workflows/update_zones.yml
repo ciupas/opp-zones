@@ -3,7 +3,7 @@ name: Aktualizacja bazy OPP
 on:
   # Automatycznie co poniedziałek o 6:00 rano
   schedule:
-    - cron: '0 6 * * 1'
+    - cron: '0 6 */2 * *'
 
   # Możliwość ręcznego uruchomienia z GitHub UI
   workflow_dispatch:
