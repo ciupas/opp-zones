@@ -1,6 +1,6 @@
 {
   "version": "2.1",
-  "updated": "2026-05-27",
+  "updated": "2026-05-31",
   "source": "OPP: naodcinku.pl | Kamery: OpenStreetMap (Overpass)",
   "total_zones": 43,
   "zones": [
@@ -25057,7 +25057,91 @@
       "operator": "",
       "_osm_id": 13885741487,
       "_source": "OpenStreetMap"
+    },
+    {
+      "id": "CAM_13894117384",
+      "lat": 54.2539195,
+      "lon": 18.9691499,
+      "limit": 120,
+      "direction": null,
+      "enforcement": "maxspeed",
+      "ref": "PLN.",
+      "operator": "CANARD",
+      "_osm_id": 13894117384,
+      "_source": "OpenStreetMap"
+    },
+    {
+      "id": "CAM_13894117385",
+      "lat": 54.2541036,
+      "lon": 18.969226,
+      "limit": 120,
+      "direction": null,
+      "enforcement": "maxspeed",
+      "ref": "PLN.",
+      "operator": "CANARD",
+      "_osm_id": 13894117385,
+      "_source": "OpenStreetMap"
+    },
+    {
+      "id": "CAM_13894117388",
+      "lat": 54.2157137,
+      "lon": 19.0961515,
+      "limit": 120,
+      "direction": null,
+      "enforcement": "maxspeed",
+      "ref": "PLN.",
+      "operator": "CANARD",
+      "_osm_id": 13894117388,
+      "_source": "OpenStreetMap"
+    },
+    {
+      "id": "CAM_13894117389",
+      "lat": 54.2155985,
+      "lon": 19.0960706,
+      "limit": 120,
+      "direction": null,
+      "enforcement": "maxspeed",
+      "ref": "PLN.",
+      "operator": "CANARD",
+      "_osm_id": 13894117389,
+      "_source": "OpenStreetMap"
+    },
+    {
+      "id": "CAM_13894313252",
+      "lat": 49.3482888,
+      "lon": 23.4884999,
+      "limit": 50,
+      "direction": null,
+      "enforcement": "maxspeed",
+      "ref": "",
+      "operator": "",
+      "_osm_id": 13894313252,
+      "_source": "OpenStreetMap"
+    },
+    {
+      "id": "CAM_13894313253",
+      "lat": 49.3457977,
+      "lon": 23.4882634,
+      "limit": 50,
+      "direction": null,
+      "enforcement": "maxspeed",
+      "ref": "",
+      "operator": "",
+      "_osm_id": 13894313253,
+      "_source": "OpenStreetMap"
+    },
+    {
+      "id": "CAM_13894313254",
+      "lat": 49.3455979,
+      "lon": 23.4881602,
+      "limit": 50,
+      "direction": 10,
+      "enforcement": "maxspeed",
+      "ref": "",
+      "operator": "",
+      "_osm_id": 13894313254,
+      "_source": "OpenStreetMap"
     }
   ],
-  "total_cameras": 2016
+  "total_cameras": 2023
 }
