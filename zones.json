@@ -1,6 +1,6 @@
 {
   "version": "2.1",
-  "updated": "2026-05-31",
+  "updated": "2026-06-05",
   "source": "OPP: naodcinku.pl | Kamery: OpenStreetMap (Overpass)",
   "total_zones": 43,
   "zones": [
@@ -25141,7 +25141,31 @@
       "operator": "",
       "_osm_id": 13894313254,
       "_source": "OpenStreetMap"
+    },
+    {
+      "id": "CAM_13901709161",
+      "lat": 49.7528896,
+      "lon": 23.9413876,
+      "limit": 50,
+      "direction": null,
+      "enforcement": "maxspeed",
+      "ref": "КАСКАД 230-1220",
+      "operator": "",
+      "_osm_id": 13901709161,
+      "_source": "OpenStreetMap"
+    },
+    {
+      "id": "CAM_13909026509",
+      "lat": 49.2811217,
+      "lon": 23.8764326,
+      "limit": 50,
+      "direction": null,
+      "enforcement": "maxspeed",
+      "ref": "",
+      "operator": "",
+      "_osm_id": 13909026509,
+      "_source": "OpenStreetMap"
     }
   ],
-  "total_cameras": 2023
+  "total_cameras": 2025
 }
