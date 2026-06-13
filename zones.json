@@ -1,8 +1,8 @@
 {
   "version": "2.1",
-  "updated": "2026-06-05",
+  "updated": "2026-06-13",
   "source": "OPP: naodcinku.pl | Kamery: OpenStreetMap (Overpass)",
-  "total_zones": 43,
+  "total_zones": 46,
   "zones": [
     {
       "id": "OPP_A1_odcinek_a1_siemionki_lubien_kujawski",
@@ -863,6 +863,66 @@
       "length_km": 0.234,
       "direction": "both",
       "_source_url": "https://naodcinku.pl/droga-ekspresowa/s52/"
+    },
+    {
+      "id": "OPP_A1_odcinek_a1_kamiensk",
+      "name": "Odcinek A1 – Kamieńsk",
+      "road": "A1",
+      "voivodeship": "łódzkie",
+      "location": "Kamieńsk, gmina Kamieńsk, powiat radomszczański",
+      "limit": 140,
+      "limit_trucks": 80,
+      "start": {
+        "lat": 51.203889,
+        "lon": 19.479556
+      },
+      "end": {
+        "lat": 51.099778,
+        "lon": 19.382972
+      },
+      "length_km": 13.563,
+      "direction": "both",
+      "_source_url": "https://naodcinku.pl/autostrada/a1/"
+    },
+    {
+      "id": "OPP_S7_odcinek_s7_raczki",
+      "name": "Odcinek S7 – Rączki",
+      "road": "S7",
+      "voivodeship": "warmińsko-mazurskie",
+      "location": "Rączki, gmina Nidzica, powiat nidzicki",
+      "limit": 120,
+      "limit_trucks": 80,
+      "start": {
+        "lat": 53.333861,
+        "lon": 20.435972
+      },
+      "end": {
+        "lat": 53.408281,
+        "lon": 20.339447
+      },
+      "length_km": 11.262,
+      "direction": "both",
+      "_source_url": "https://naodcinku.pl/droga-ekspresowa/s7/"
+    },
+    {
+      "id": "OPP_S17_odcinek_s17_chrzachowek",
+      "name": "Odcinek S17 – Chrząchówek",
+      "road": "S17",
+      "voivodeship": "lubelskie",
+      "location": "Chrząchówek, gmina Końskowola, powiat puławski",
+      "limit": 120,
+      "limit_trucks": 80,
+      "start": {
+        "lat": 51.431372,
+        "lon": 22.143372
+      },
+      "end": {
+        "lat": 51.384692,
+        "lon": 22.269611
+      },
+      "length_km": 10.337,
+      "direction": "both",
+      "_source_url": "https://naodcinku.pl/droga-ekspresowa/s17/"
     }
   ],
   "cameras": [
@@ -25165,7 +25225,31 @@
       "operator": "",
       "_osm_id": 13909026509,
       "_source": "OpenStreetMap"
+    },
+    {
+      "id": "CAM_13919562731",
+      "lat": 52.4597934,
+      "lon": 21.0189767,
+      "limit": 50,
+      "direction": null,
+      "enforcement": "maxspeed",
+      "ref": "",
+      "operator": "",
+      "_osm_id": 13919562731,
+      "_source": "OpenStreetMap"
+    },
+    {
+      "id": "CAM_13918109304",
+      "lat": 49.9256773,
+      "lon": 15.9445946,
+      "limit": 50,
+      "direction": null,
+      "enforcement": "maxspeed",
+      "ref": "",
+      "operator": "",
+      "_osm_id": 13918109304,
+      "_source": "OpenStreetMap"
     }
   ],
-  "total_cameras": 2025
+  "total_cameras": 2027
 }
