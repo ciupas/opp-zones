@@ -1,8 +1,8 @@
 {
   "version": "2.1",
-  "updated": "2026-06-21",
+  "updated": "2026-06-23",
   "source": "OPP: naodcinku.pl | Kamery: OpenStreetMap (Overpass)",
-  "total_zones": 46,
+  "total_zones": 49,
   "zones": [
     {
       "id": "OPP_A1_odcinek_a1_siemionki_lubien_kujawski",
@@ -923,6 +923,66 @@
       "length_km": 10.337,
       "direction": "both",
       "_source_url": "https://naodcinku.pl/droga-ekspresowa/s17/"
+    },
+    {
+      "id": "OPP_S6_odcinek_s6_gdansk",
+      "name": "Odcinek S6 – Gdańsk",
+      "road": "S6",
+      "voivodeship": "pomorskie",
+      "location": "Gdańsk (węzeł Karczemki – węzeł Szadółki)",
+      "limit": 120,
+      "limit_trucks": 80,
+      "start": {
+        "lat": 54.409139,
+        "lon": 18.485917
+      },
+      "end": {
+        "lat": 54.383111,
+        "lon": 18.505556
+      },
+      "length_km": 3.37,
+      "direction": "both",
+      "_source_url": "https://naodcinku.pl/droga-ekspresowa/s6/"
+    },
+    {
+      "id": "OPP_S7_odcinek_s7_barcza",
+      "name": "Odcinek S7 – Barcza",
+      "road": "S7",
+      "voivodeship": "świętokrzyskie",
+      "location": "Barcza, gmina Zagnańsk, powiat kielecki",
+      "limit": 120,
+      "limit_trucks": 80,
+      "start": {
+        "lat": 50.953406,
+        "lon": 20.705567
+      },
+      "end": {
+        "lat": 50.941558,
+        "lon": 20.676303
+      },
+      "length_km": 2.522,
+      "direction": "both",
+      "_source_url": "https://naodcinku.pl/droga-ekspresowa/s7/"
+    },
+    {
+      "id": "OPP_S7_odcinek_s7_dworek",
+      "name": "Odcinek S7 – Dworek",
+      "road": "S7",
+      "voivodeship": "pomorskie",
+      "location": "Dworek, gmina Stegna, powiat nowodworski",
+      "limit": 120,
+      "limit_trucks": 80,
+      "start": {
+        "lat": 54.253722,
+        "lon": 18.970639
+      },
+      "end": {
+        "lat": 54.216111,
+        "lon": 19.093778
+      },
+      "length_km": 9.134,
+      "direction": "both",
+      "_source_url": "https://naodcinku.pl/droga-ekspresowa/s7/"
     }
   ],
   "cameras": [
@@ -25321,7 +25381,67 @@
       "operator": "",
       "_osm_id": 13953673090,
       "_source": "OpenStreetMap"
+    },
+    {
+      "id": "CAM_13956099341",
+      "lat": 53.1029077,
+      "lon": 18.2442379,
+      "limit": 50,
+      "direction": null,
+      "enforcement": "maxspeed",
+      "ref": "PLN.2.122",
+      "operator": "CANARD",
+      "_osm_id": 13956099341,
+      "_source": "OpenStreetMap"
+    },
+    {
+      "id": "CAM_13957522045",
+      "lat": 53.5398872,
+      "lon": 18.8351256,
+      "limit": 50,
+      "direction": null,
+      "enforcement": "maxspeed",
+      "ref": "PLN.1.123",
+      "operator": "CANARD",
+      "_osm_id": 13957522045,
+      "_source": "OpenStreetMap"
+    },
+    {
+      "id": "CAM_13956100987",
+      "lat": 53.2591947,
+      "lon": 19.3518136,
+      "limit": 50,
+      "direction": null,
+      "enforcement": "maxspeed",
+      "ref": "TraffiStar SR390",
+      "operator": "",
+      "_osm_id": 13956100987,
+      "_source": "OpenStreetMap"
+    },
+    {
+      "id": "CAM_13957470260",
+      "lat": 51.7323286,
+      "lon": 17.3140187,
+      "limit": 50,
+      "direction": null,
+      "enforcement": "maxspeed",
+      "ref": "WLK.2.092",
+      "operator": "CANARD",
+      "_osm_id": 13957470260,
+      "_source": "OpenStreetMap"
+    },
+    {
+      "id": "CAM_13957489152",
+      "lat": 51.7944297,
+      "lon": 15.2336408,
+      "limit": 50,
+      "direction": null,
+      "enforcement": "maxspeed",
+      "ref": "PNZ.2.110",
+      "operator": "CANARD",
+      "_osm_id": 13957489152,
+      "_source": "OpenStreetMap"
     }
   ],
-  "total_cameras": 2033
+  "total_cameras": 2038
 }
