@@ -1,8 +1,8 @@
 {
   "version": "2.1",
-  "updated": "2026-06-29",
+  "updated": "2026-07-01",
   "source": "OPP: naodcinku.pl | Kamery: OpenStreetMap (Overpass)",
-  "total_zones": 49,
+  "total_zones": 50,
   "zones": [
     {
       "id": "OPP_A1_odcinek_a1_siemionki_lubien_kujawski",
@@ -983,6 +983,26 @@
       "length_km": 9.134,
       "direction": "both",
       "_source_url": "https://naodcinku.pl/droga-ekspresowa/s7/"
+    },
+    {
+      "id": "OPP_A1_odcinek_a1_radziechowice_drugie",
+      "name": "Odcinek A1 – Radziechowice Drugie",
+      "road": "A1",
+      "voivodeship": "łódzkie",
+      "location": "Radziechowice Drugie, gmina Ładzice, powiat radomszczański",
+      "limit": 140,
+      "limit_trucks": 80,
+      "start": {
+        "lat": 51.064028,
+        "lon": 19.363806
+      },
+      "end": {
+        "lat": 50.9205,
+        "lon": 19.220778
+      },
+      "length_km": 18.973,
+      "direction": "both",
+      "_source_url": "https://naodcinku.pl/autostrada/a1/"
     }
   ],
   "cameras": [
@@ -25375,7 +25395,7 @@
       "lat": 52.2878426,
       "lon": 14.4599112,
       "limit": 80,
-      "direction": 48,
+      "direction": 60,
       "enforcement": "maxspeed",
       "ref": "",
       "operator": "",
@@ -25501,7 +25521,19 @@
       "operator": "",
       "_osm_id": 13971100788,
       "_source": "OpenStreetMap"
+    },
+    {
+      "id": "CAM_13974387783",
+      "lat": 50.1371413,
+      "lon": 21.965142,
+      "limit": 50,
+      "direction": null,
+      "enforcement": "maxspeed",
+      "ref": "",
+      "operator": "",
+      "_osm_id": 13974387783,
+      "_source": "OpenStreetMap"
     }
   ],
-  "total_cameras": 2043
+  "total_cameras": 2044
 }
