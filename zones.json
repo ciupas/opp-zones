@@ -1,8 +1,8 @@
 {
   "version": "2.1",
-  "updated": "2026-07-01",
+  "updated": "2026-07-05",
   "source": "OPP: naodcinku.pl | Kamery: OpenStreetMap (Overpass)",
-  "total_zones": 50,
+  "total_zones": 55,
   "zones": [
     {
       "id": "OPP_A1_odcinek_a1_siemionki_lubien_kujawski",
@@ -1003,6 +1003,106 @@
       "length_km": 18.973,
       "direction": "both",
       "_source_url": "https://naodcinku.pl/autostrada/a1/"
+    },
+    {
+      "id": "OPP_A1_odcinek_a1_kaszewy_dworne",
+      "name": "Odcinek A1 – Kaszewy Dworne",
+      "road": "A1",
+      "voivodeship": "łódzkie",
+      "location": "Kaszewy Dworne, gmina Krzyżanów, powiat kutnowski",
+      "limit": 140,
+      "limit_trucks": 80,
+      "start": {
+        "lat": 52.220972,
+        "lon": 19.470694
+      },
+      "end": {
+        "lat": 52.069111,
+        "lon": 19.535389
+      },
+      "length_km": 17.961,
+      "direction": "both",
+      "_source_url": "https://naodcinku.pl/autostrada/a1/"
+    },
+    {
+      "id": "OPP_A1_odcinek_a1_piotrkow_trybunalski",
+      "name": "Odcinek A1 – Piotrków Trybunalski",
+      "road": "A1",
+      "voivodeship": "łódzkie",
+      "location": "Piotrków Trybunalski",
+      "limit": 140,
+      "limit_trucks": 80,
+      "start": {
+        "lat": 51.3945,
+        "lon": 19.629639
+      },
+      "end": {
+        "lat": 51.238028,
+        "lon": 19.518306
+      },
+      "length_km": 19.304,
+      "direction": "both",
+      "_source_url": "https://naodcinku.pl/autostrada/a1/"
+    },
+    {
+      "id": "OPP_A1_odcinek_a1_zabrze",
+      "name": "Odcinek A1 – Zabrze",
+      "road": "A1",
+      "voivodeship": "śląskie",
+      "location": "Zabrze",
+      "limit": 140,
+      "limit_trucks": 80,
+      "start": {
+        "lat": 50.373528,
+        "lon": 18.761833
+      },
+      "end": {
+        "lat": 50.350581,
+        "lon": 18.723861
+      },
+      "length_km": 4.189,
+      "direction": "both",
+      "_source_url": "https://naodcinku.pl/autostrada/a1/"
+    },
+    {
+      "id": "OPP_A4_odcinek_a4_krakow",
+      "name": "Odcinek A4 – Kraków",
+      "road": "A4",
+      "voivodeship": "małopolskie",
+      "location": "Kraków, powiat Kraków, gmina Kraków (Obwodnica Krakowa)",
+      "limit": 140,
+      "limit_trucks": 80,
+      "start": {
+        "lat": 50.000444,
+        "lon": 19.949194
+      },
+      "end": {
+        "lat": 50.001806,
+        "lon": 20.003583
+      },
+      "length_km": 3.938,
+      "direction": "both",
+      "_source_url": "https://naodcinku.pl/autostrada/a4/"
+    },
+    {
+      "id": "OPP_S8_odcinek_s8_gosie_duze",
+      "name": "Odcinek S8 – Gosie Duże",
+      "road": "S8",
+      "voivodeship": "podlaskie",
+      "location": "Gosie Duże, gmina Kołaki Kościelne, powiat zambrowski",
+      "limit": 120,
+      "limit_trucks": 80,
+      "start": {
+        "lat": 53.043806,
+        "lon": 22.365444
+      },
+      "end": {
+        "lat": 53.090083,
+        "lon": 22.491306
+      },
+      "length_km": 10.105,
+      "direction": "both",
+      "_source_url": "https://naodcinku.pl/droga-ekspresowa/s8/"
     }
   ],
   "cameras": [
@@ -9735,7 +9835,7 @@
       "lat": 49.9672721,
       "lon": 18.7190205,
       "limit": 70,
-      "direction": -15,
+      "direction": 345,
       "enforcement": "maxspeed",
       "ref": "SLA.1.066",
       "operator": "CANARD",
@@ -9963,7 +10063,7 @@
       "lat": 49.9007,
       "lon": 18.9921167,
       "limit": 70,
-      "direction": -10,
+      "direction": 350,
       "enforcement": "maxspeed",
       "ref": "SLA.1.055",
       "operator": "CANARD",
@@ -11415,7 +11515,7 @@
       "lat": 50.1704728,
       "lon": 18.9163612,
       "limit": 50,
-      "direction": -20,
+      "direction": 340,
       "enforcement": "maxspeed",
       "ref": "SLA.1.078",
       "operator": "CANARD",
@@ -21482,7 +21582,7 @@
       "id": "CAM_13380860798",
       "lat": 51.1556926,
       "lon": 15.0348106,
-      "limit": 0,
+      "limit": 90,
       "direction": null,
       "enforcement": "maxspeed",
       "ref": "PDZ.2.097",
@@ -25533,7 +25633,175 @@
       "operator": "",
       "_osm_id": 13974387783,
       "_source": "OpenStreetMap"
+    },
+    {
+      "id": "CAM_13983425673",
+      "lat": 52.0285602,
+      "lon": 22.8800001,
+      "limit": 50,
+      "direction": null,
+      "enforcement": "maxspeed",
+      "ref": "593-072-73282",
+      "operator": "CANARD",
+      "_osm_id": 13983425673,
+      "_source": "OpenStreetMap"
+    },
+    {
+      "id": "CAM_13983425675",
+      "lat": 52.0349824,
+      "lon": 23.3246169,
+      "limit": 90,
+      "direction": null,
+      "enforcement": "maxspeed",
+      "ref": "593-072-73281",
+      "operator": "CANARD",
+      "_osm_id": 13983425675,
+      "_source": "OpenStreetMap"
+    },
+    {
+      "id": "CAM_13983425678",
+      "lat": 52.0374761,
+      "lon": 23.489153,
+      "limit": 50,
+      "direction": null,
+      "enforcement": "maxspeed",
+      "ref": "23142FU10003691",
+      "operator": "CANARD",
+      "_osm_id": 13983425678,
+      "_source": "OpenStreetMap"
+    },
+    {
+      "id": "CAM_13983962771",
+      "lat": 53.9338251,
+      "lon": 22.9787085,
+      "limit": 50,
+      "direction": null,
+      "enforcement": "maxspeed",
+      "ref": "23165FU10003780",
+      "operator": "CANARD",
+      "_osm_id": 13983962771,
+      "_source": "OpenStreetMap"
+    },
+    {
+      "id": "CAM_13983962773",
+      "lat": 54.1189347,
+      "lon": 22.9381437,
+      "limit": 50,
+      "direction": null,
+      "enforcement": "maxspeed",
+      "ref": "593-072-73283",
+      "operator": "CANARD",
+      "_osm_id": 13983962773,
+      "_source": "OpenStreetMap"
+    },
+    {
+      "id": "CAM_13983989309",
+      "lat": 53.6883477,
+      "lon": 23.0943825,
+      "limit": 50,
+      "direction": null,
+      "enforcement": "maxspeed",
+      "ref": "593-072-73345",
+      "operator": "CANARD",
+      "_osm_id": 13983989309,
+      "_source": "OpenStreetMap"
+    },
+    {
+      "id": "CAM_13983989311",
+      "lat": 53.8036907,
+      "lon": 22.9687598,
+      "limit": 50,
+      "direction": null,
+      "enforcement": "maxspeed",
+      "ref": "593-072/71988",
+      "operator": "CANARD",
+      "_osm_id": 13983989311,
+      "_source": "OpenStreetMap"
+    },
+    {
+      "id": "CAM_13983952849",
+      "lat": 50.300753,
+      "lon": 15.8599249,
+      "limit": 50,
+      "direction": null,
+      "enforcement": "maxspeed",
+      "ref": "",
+      "operator": "",
+      "_osm_id": 13983952849,
+      "_source": "OpenStreetMap"
+    },
+    {
+      "id": "CAM_13986343798",
+      "lat": 49.7338618,
+      "lon": 14.967285,
+      "limit": 50,
+      "direction": null,
+      "enforcement": "maxspeed",
+      "ref": "",
+      "operator": "",
+      "_osm_id": 13986343798,
+      "_source": "OpenStreetMap"
+    },
+    {
+      "id": "CAM_13986348013",
+      "lat": 49.7382713,
+      "lon": 14.9669378,
+      "limit": 50,
+      "direction": null,
+      "enforcement": "maxspeed",
+      "ref": "",
+      "operator": "",
+      "_osm_id": 13986348013,
+      "_source": "OpenStreetMap"
+    },
+    {
+      "id": "CAM_13986348014",
+      "lat": 49.8242537,
+      "lon": 15.0234225,
+      "limit": 50,
+      "direction": null,
+      "enforcement": "maxspeed",
+      "ref": "",
+      "operator": "",
+      "_osm_id": 13986348014,
+      "_source": "OpenStreetMap"
+    },
+    {
+      "id": "CAM_13986348015",
+      "lat": 49.8230089,
+      "lon": 15.0238448,
+      "limit": 50,
+      "direction": null,
+      "enforcement": "maxspeed",
+      "ref": "",
+      "operator": "",
+      "_osm_id": 13986348015,
+      "_source": "OpenStreetMap"
+    },
+    {
+      "id": "CAM_13986348016",
+      "lat": 49.8217241,
+      "lon": 15.0242816,
+      "limit": 50,
+      "direction": null,
+      "enforcement": "maxspeed",
+      "ref": "",
+      "operator": "",
+      "_osm_id": 13986348016,
+      "_source": "OpenStreetMap"
+    },
+    {
+      "id": "CAM_13986504356",
+      "lat": 51.0418491,
+      "lon": 14.11963,
+      "limit": 50,
+      "direction": null,
+      "enforcement": "maxspeed",
+      "ref": "",
+      "operator": "",
+      "_osm_id": 13986504356,
+      "_source": "OpenStreetMap"
     }
   ],
-  "total_cameras": 2044
+  "total_cameras": 2058
 }
