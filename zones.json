@@ -1,6 +1,6 @@
 {
   "version": "2.1",
-  "updated": "2026-07-05",
+  "updated": "2026-07-09",
   "source": "OPP: naodcinku.pl | Kamery: OpenStreetMap (Overpass)",
   "total_zones": 55,
   "zones": [
@@ -25801,7 +25801,19 @@
       "operator": "",
       "_osm_id": 13986504356,
       "_source": "OpenStreetMap"
+    },
+    {
+      "id": "CAM_13995445175",
+      "lat": 52.322465,
+      "lon": 14.9437887,
+      "limit": 50,
+      "direction": null,
+      "enforcement": "maxspeed",
+      "ref": "643294-60124",
+      "operator": "CANARD",
+      "_osm_id": 13995445175,
+      "_source": "OpenStreetMap"
     }
   ],
-  "total_cameras": 2058
+  "total_cameras": 2059
 }
