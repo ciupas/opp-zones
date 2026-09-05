@@ -1,6 +1,6 @@
 {
   "version": "2.1",
-  "updated": "2026-08-27",
+  "updated": "2026-09-05",
   "source": "OPP: naodcinku.pl | Kamery: OpenStreetMap (Overpass)",
   "total_zones": 55,
   "zones": [
@@ -22279,7 +22279,7 @@
       "lat": 51.9559043,
       "lon": 19.3159453,
       "limit": 70,
-      "direction": 170,
+      "direction": 0,
       "enforcement": "maxspeed",
       "ref": "CEN.1.118",
       "operator": "",
@@ -26425,7 +26425,103 @@
       "operator": "",
       "_osm_id": 14125502075,
       "_source": "OpenStreetMap"
+    },
+    {
+      "id": "CAM_14114259542",
+      "lat": 49.8034372,
+      "lon": 23.3529721,
+      "limit": 50,
+      "direction": null,
+      "enforcement": "maxspeed",
+      "ref": "М-11 Львів-Шегині 50+620",
+      "operator": "",
+      "_osm_id": 14114259542,
+      "_source": "OpenStreetMap"
+    },
+    {
+      "id": "CAM_14114259544",
+      "lat": 49.9223224,
+      "lon": 23.7288325,
+      "limit": 50,
+      "direction": null,
+      "enforcement": "maxspeed",
+      "ref": "М-10 Львів-Краковець 23+475",
+      "operator": "",
+      "_osm_id": 14114259544,
+      "_source": "OpenStreetMap"
+    },
+    {
+      "id": "CAM_14114334807",
+      "lat": 49.2575626,
+      "lon": 23.8493147,
+      "limit": 50,
+      "direction": null,
+      "enforcement": "maxspeed",
+      "ref": "м. Стрий, перехр. вул. Шевченка та Олесницького",
+      "operator": "",
+      "_osm_id": 14114334807,
+      "_source": "OpenStreetMap"
+    },
+    {
+      "id": "CAM_14116725539",
+      "lat": 51.856732,
+      "lon": 19.4062513,
+      "limit": 0,
+      "direction": null,
+      "enforcement": "maxspeed",
+      "ref": "",
+      "operator": "CANARD",
+      "_osm_id": 14116725539,
+      "_source": "OpenStreetMap"
+    },
+    {
+      "id": "CAM_14116725540",
+      "lat": 51.8563179,
+      "lon": 19.4052352,
+      "limit": 0,
+      "direction": null,
+      "enforcement": "maxspeed",
+      "ref": "",
+      "operator": "CANARD",
+      "_osm_id": 14116725540,
+      "_source": "OpenStreetMap"
+    },
+    {
+      "id": "CAM_14116725541",
+      "lat": 51.8561926,
+      "lon": 19.4069361,
+      "limit": 0,
+      "direction": null,
+      "enforcement": "maxspeed",
+      "ref": "",
+      "operator": "CANARD",
+      "_osm_id": 14116725541,
+      "_source": "OpenStreetMap"
+    },
+    {
+      "id": "CAM_14116725542",
+      "lat": 51.8557982,
+      "lon": 19.4061101,
+      "limit": 0,
+      "direction": null,
+      "enforcement": "maxspeed",
+      "ref": "",
+      "operator": "CANARD",
+      "_osm_id": 14116725542,
+      "_source": "OpenStreetMap"
+    },
+    {
+      "id": "CAM_14116799217",
+      "lat": 51.9285356,
+      "lon": 19.3534237,
+      "limit": 50,
+      "direction": 150,
+      "enforcement": "maxspeed",
+      "ref": "",
+      "operator": "CANARD",
+      "_osm_id": 14116799217,
+      "_source": "OpenStreetMap"
     }
   ],
-  "total_cameras": 2110
+  "total_cameras": 2118
 }
