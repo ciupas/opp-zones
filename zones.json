@@ -1,6 +1,6 @@
 {
   "version": "2.1",
-  "updated": "2026-10-27",
+  "updated": "2026-10-31",
   "source": "OPP: naodcinku.pl | Kamery: OpenStreetMap (Overpass)",
   "total_zones": 55,
   "zones": [
@@ -26833,7 +26833,103 @@
       "operator": "",
       "_osm_id": 14321786371,
       "_source": "OpenStreetMap"
+    },
+    {
+      "id": "CAM_14323630961",
+      "lat": 50.6065865,
+      "lon": 15.8433387,
+      "limit": 50,
+      "direction": null,
+      "enforcement": "average_speed",
+      "ref": "",
+      "operator": "",
+      "_osm_id": 14323630961,
+      "_source": "OpenStreetMap"
+    },
+    {
+      "id": "CAM_14323630962",
+      "lat": 50.6069388,
+      "lon": 15.8410473,
+      "limit": 50,
+      "direction": null,
+      "enforcement": "average_speed",
+      "ref": "",
+      "operator": "",
+      "_osm_id": 14323630962,
+      "_source": "OpenStreetMap"
+    },
+    {
+      "id": "CAM_14323630963",
+      "lat": 50.6068793,
+      "lon": 15.841024,
+      "limit": 50,
+      "direction": null,
+      "enforcement": "average_speed",
+      "ref": "",
+      "operator": "",
+      "_osm_id": 14323630963,
+      "_source": "OpenStreetMap"
+    },
+    {
+      "id": "CAM_14323630964",
+      "lat": 50.6065027,
+      "lon": 15.8433082,
+      "limit": 50,
+      "direction": null,
+      "enforcement": "average_speed",
+      "ref": "",
+      "operator": "",
+      "_osm_id": 14323630964,
+      "_source": "OpenStreetMap"
+    },
+    {
+      "id": "CAM_14323663693",
+      "lat": 50.5956936,
+      "lon": 15.8044464,
+      "limit": 50,
+      "direction": null,
+      "enforcement": "average_speed",
+      "ref": "",
+      "operator": "",
+      "_osm_id": 14323663693,
+      "_source": "OpenStreetMap"
+    },
+    {
+      "id": "CAM_14323663694",
+      "lat": 50.5974694,
+      "lon": 15.8270376,
+      "limit": 50,
+      "direction": null,
+      "enforcement": "average_speed",
+      "ref": "",
+      "operator": "",
+      "_osm_id": 14323663694,
+      "_source": "OpenStreetMap"
+    },
+    {
+      "id": "CAM_14323663695",
+      "lat": 50.5975226,
+      "lon": 15.8270372,
+      "limit": 50,
+      "direction": null,
+      "enforcement": "average_speed",
+      "ref": "",
+      "operator": "",
+      "_osm_id": 14323663695,
+      "_source": "OpenStreetMap"
+    },
+    {
+      "id": "CAM_14323663696",
+      "lat": 50.5957514,
+      "lon": 15.8043559,
+      "limit": 50,
+      "direction": null,
+      "enforcement": "average_speed",
+      "ref": "",
+      "operator": "",
+      "_osm_id": 14323663696,
+      "_source": "OpenStreetMap"
     }
   ],
-  "total_cameras": 2144
+  "total_cameras": 2152
 }
